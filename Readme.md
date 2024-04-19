@@ -3,7 +3,7 @@
 
 Install dependencies with poetry
 
-- Set Create .env
+- Create .env with SECRET_KEY and DEBUG vars
 
 ```bash
 poetry install
@@ -18,7 +18,7 @@ poe importdata /path/to/your.csv
 ## Playing with the library
 ```bash
 poe book borrow 2 "2024-04-18 00:00:00"
-poe book return 3 "2024-04-30 00:00:00"
+poe book return 2 "2024-04-30 00:00:00"
 ```
 
 ## Tests
