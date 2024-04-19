@@ -1,0 +1,88 @@
+[tool.poetry]
+name = "PrusaLibrary"
+version = "0.1.0"
+description = ""
+authors = ["Michal Pomykacz <michal@pomyka.cz>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+django = "^5.0.4"
+djangorestframework = "^3.15.1"
+django-filter = "^24.2"
+django-environ = "^0.11.2"
+requests = "^2.31.0"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.4.0"
+pytest-django = "^4.8.0"
+mypy = "^1.9.0"
+poethepoet = "^0.25.1"
+django-stubs = "^4.2.7"
+pytest-mock = "^3.14.0"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "app.settings"
+testpaths = "tests"
+python_files = "test_*.py"
+addopts = "--showlocals -rxs -vv --color=yes --durations=5 --maxfail=1"
+markers = [
+    "unit",
+    "component",
+    "integration"
+]
+
+[tool.poe.tasks.format]
+help = "Run Black formatter"
+cmd = "black ."
+
+[tool.poe.tasks.typing]
+help = "Run Mypy type checker"
+cmd = "mypy ."
+
+[tool.poe.tasks.test]
+help = "Run tests"
+cmd = "py.test tests"
+
+[tool.poe.tasks.makemigrations]
+cmd = "./manage.py makemigrations"
+
+[tool.poe.tasks.migrate]
+cmd = "./manage.py migrate"
+
+[tool.poe.tasks.importdata]
+cmd = "./manage.py import_data ${path}"
+
+    [[tool.poe.tasks.importdata.args]]
+    name = "path"
+    positional = true
+
+[tool.poe.tasks.book]
+help = "Run book operation command"
+control.expr = "action"
+
+    [[tool.poe.tasks.book.args]]
+    help = "Perform one of the following actions on book: borrow, return"
+    name = "action"
+    required = true
+    positional = true
+
+    [[tool.poe.tasks.book.args]]
+    name = "book_id"
+    positional = true
+
+    [[tool.poe.tasks.book.args]]
+    name = "dt"
+    positional = true
+
+    [[tool.poe.tasks.book.args]]
+    name = "host"
+    default = "http://localhost:8000"
+
+    [[tool.poe.tasks.book.switch]]
+    case = "borrow"
+    cmd = './manage.py ${action}_book ${host} ${book_id} "${dt}"'
+
+    [[tool.poe.tasks.book.switch]]
+    case = "return"
+    cmd = './manage.py ${action}_book ${host} ${book_id} "${dt}"'

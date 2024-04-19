@@ -1,0 +1,19 @@
+*.pyc
+
+# IDEs
+/.idea
+/.vscode
+/utils/.vscode
+
+# Development tools
+/venv
+/.venv
+/.env
+
+# Test artefacts
+*.mypy_cache
+/.pytest_cache
+.coverage*
+
+# Project's stuff
+db.sqlite3
