@@ -13,7 +13,7 @@ class BookFilter(FilterSet):
             "isbn": ["exact"],
             "language_code": ["exact"],
             "is_available": ["exact"],
-            "original_publication_year": ["exact", "gt", "lt"],
-            "avg_borrowing_time": ["exact", "gt", "lt"],
-            "borrowing_count": ["exact", "gt", "lt"],
+            "original_publication_year": ["exact", "gte", "lte"],
+            "avg_borrowing_time": ["exact", "gte", "lte"],
+            "borrowing_count": ["exact", "gte", "lte"],
         }

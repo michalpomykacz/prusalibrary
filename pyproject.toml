@@ -20,9 +20,10 @@ mypy = "^1.9.0"
 poethepoet = "^0.25.1"
 django-stubs = "^4.2.7"
 pytest-mock = "^3.14.0"
+coverage = "^7.4.4"
 
 [tool.pytest.ini_options]
-DJANGO_SETTINGS_MODULE = "app.settings"
+DJANGO_SETTINGS_MODULE = "tests.settings"
 testpaths = "tests"
 python_files = "test_*.py"
 addopts = "--showlocals -rxs -vv --color=yes --durations=5 --maxfail=1"
@@ -47,6 +48,10 @@ cmd = "mypy ."
 [tool.poe.tasks.test]
 help = "Run tests"
 cmd = "py.test tests"
+
+[tool.poe.tasks.coverage]
+help = "Run tests and show coverage"
+shell = """coverage run -m pytest tests && coverage report"""
 
 [tool.poe.tasks.makemigrations]
 cmd = "./manage.py makemigrations"

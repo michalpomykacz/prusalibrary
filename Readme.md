@@ -26,6 +26,20 @@ curl http://localhost:8000/api/v1/books?title=The%20Hobbit
 curl http://localhost:8000/api/v1/books/7
 ```
 
+Possible filters for /books are:
+- title
+- isbn
+- language_code
+- is_available
+- original_publication_year (gte, lte)
+- avg_borrowing_time (gte, lte)
+- borrowing_count (gte, lte)
+
+i.e.: 
+```bash
+curl http://localhost:8000/api/v1/books?original_publication_year=2000&avg_borrowing_time__gte=10
+```
+
 
 ## Playing with the library
 ```bash

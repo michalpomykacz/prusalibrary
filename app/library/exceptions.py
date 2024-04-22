@@ -1,5 +1,3 @@
-
-
 class LibraryError(Exception):
     """Base class for Library business logic exceptions."""
 

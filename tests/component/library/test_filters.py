@@ -16,12 +16,12 @@ class TestBookFilter:
             pytest.param({"isbn": "439023483"}, ["439023483"], id="isbn filter"),
             pytest.param({"title": "Hunger"}, ["439023483"], id="title search"),
             pytest.param(
-                {"original_publication_year__gt": 2000},
+                {"original_publication_year__gte": 2000},
                 ["439023483"],
                 id="publication_year gt filter",
             ),
             pytest.param(
-                {"original_publication_year__lt": 2000},
+                {"original_publication_year__lte": 2000},
                 ["439554934"],
                 id="publication_year lt filter",
             ),

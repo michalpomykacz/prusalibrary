@@ -11,6 +11,8 @@ def api_exception_handler(exc, context):
     if response is None:
         match exc:
             case LibraryError():
-                response = Response(data=exc.detail, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
+                response = Response(
+                    data=exc.detail, status=status.HTTP_422_UNPROCESSABLE_ENTITY
+                )
 
     return response
