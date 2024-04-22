@@ -32,6 +32,10 @@ markers = [
     "integration"
 ]
 
+[tool.poe.tasks.run]
+help = "Run prusalibrary API app"
+cmd = "./manage.py runserver"
+
 [tool.poe.tasks.format]
 help = "Run Black formatter"
 cmd = "black ."
