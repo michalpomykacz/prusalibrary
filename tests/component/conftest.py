@@ -8,7 +8,7 @@ from app.library.models import Book, Borrowing
 
 
 @pytest.fixture
-def api_rf():
+def api_rf() -> APIRequestFactory:
     return APIRequestFactory()
 
 

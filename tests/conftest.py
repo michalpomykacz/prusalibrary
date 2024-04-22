@@ -1,9 +1,11 @@
+from datetime import datetime
+
 import pytest
 
-from app.library.models import Book, Author
+from app.library.models import Book, Author, Borrowing
 
 
-@pytest.fixture
+@pytest.fixture()
 def books_in_db() -> list[Book]:
 
     author1 = Author.objects.create(name="Suzanne Collins")
@@ -32,3 +34,23 @@ def books_in_db() -> list[Book]:
     book2.authors.add(author2, author3)
 
     return [book1, book2]
+
+
+@pytest.fixture()
+def available_book() -> Book:
+    return Book.objects.create(
+        isbn="439023483",
+        title="The Hunger Games",
+        is_available=True,
+    )
+
+
+@pytest.fixture
+def borrowed_book() -> Book:
+    book = Book.objects.create(
+        isbn="439023483",
+        title="The Hunger Games",
+        is_available=False,
+    )
+    Borrowing.objects.create(book=book, borrow_dt=datetime(2024, 1, 1, 0, 0))
+    return book

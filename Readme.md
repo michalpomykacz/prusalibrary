@@ -51,4 +51,5 @@ poe book return 2 "2024-04-30 00:00:00"
 
 ```bash
 poe test
+poe coverage
 ```
