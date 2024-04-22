@@ -42,6 +42,7 @@ REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser",
     ],
+    "EXCEPTION_HANDLER": "app.exception_handlers.api_exception_handler",
 }
 
 LANGUAGE_CODE = "en-us"

@@ -32,8 +32,13 @@ class Borrowing(models.Model):
 
     class Meta:
         constraints = [
+            models.UniqueConstraint(  # This index is implemented to prevent the same book from being borrowed more than once at a time.
+                fields=["book"],
+                name="currently_borrowed_book",
+                condition=models.Q(return_dt__isnull=True),
+            ),
             models.CheckConstraint(
                 check=models.Q(return_dt__gte=models.F("borrow_dt")),
                 name="return_dt_gte_borrow_dt",
-            )
+            ),
         ]

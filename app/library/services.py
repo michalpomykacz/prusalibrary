@@ -1,16 +1,20 @@
 from datetime import datetime
 
-from django.db import transaction
+from django.db import transaction, IntegrityError
 
+from app.library.exceptions import LibraryError
 from app.library.models import Book, Borrowing
 
 
-@transaction.atomic
 def borrow_book(book: Book, borrow_dt: datetime):
-    book.borrowing_set.create(borrow_dt=borrow_dt)
-    book.is_available = False
-    book.borrowing_count += 1
-    book.save()
+    try:
+        with transaction.atomic():
+            book.borrowing_set.create(borrow_dt=borrow_dt)
+            book.is_available = False
+            book.borrowing_count += 1
+            book.save()
+    except IntegrityError:
+        raise LibraryError("The book has been borrowed in the meantime.")
 
 
 @transaction.atomic
