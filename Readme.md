@@ -10,10 +10,22 @@ poetry install
 poe migrate
 ```
 
+## Run
+```bash
+poe run
+```
+
 ## Useful commands
 ```bash
 poe importdata /path/to/your.csv
 ```
+
+## Browse books
+```bash
+curl http://localhost:8000/api/v1/books?title=The%20Hobbit
+curl http://localhost:8000/api/v1/books/7
+```
+
 
 ## Playing with the library
 ```bash
